@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Hero from "./components/hero/Hero";
 import Features from "./components/features/Features";
-import { BlogSection } from "./components/blog/blogSectionHomePage";
 import { PricingSection } from "./components/pricing/Pricing";
+import { BlogSection } from "./components/blog/blogSectionHomePage";
 
 export default function Home() {
   return (

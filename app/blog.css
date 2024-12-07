@@ -1,0 +1,19 @@
+
+p,ol, ul{
+    @apply mb-3 text-gray-700 
+}
+
+h2 {
+    @apply text-xl    my-2 text-gray-800
+}
+
+
+em {
+    @apply block bg-gray-100 p-2  text-lg border-l-2 border-l-gray-500 my-2
+}
+a {
+    @apply text-indigo-700 
+}
+h3{
+    @apply text-gray-700
+}
