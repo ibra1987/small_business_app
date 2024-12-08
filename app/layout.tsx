@@ -17,7 +17,7 @@ export default function RootLayout({
       <body
         className={` font-sans antialiased`}
       >
-     <div className="min-h-screen flex flex-col justify-between items-center px-4 max-w-6xl mx-auto">
+     <div className="min-h-screen flex flex-col justify-between items-center px-4 max-w-6xl mx-auto relative">
           <Header/>
           {children}
     

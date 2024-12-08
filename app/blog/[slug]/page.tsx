@@ -34,7 +34,7 @@ async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   return (
     <main className={`${poppins.className} min-h-screen w-full flex flex-col justify-start items-center pt-16`}>
        
-        <article className="w-full max-w-5xl flex flex-col gap-2 justify-start items-start ">
+        <article className="w-full max-w-4xl flex flex-col gap-2 justify-start items-start ">
           <h1 className="font-black text-3xl text-gray-800 mb-4 md:text-4xl">
             {response?.data?.title}{" "}
           </h1>

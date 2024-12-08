@@ -1,10 +1,8 @@
 "use server"
 
-import { supabase } from "@/config/supabase"
+import { createClient } from "@/config/supabase/supabaseServer"
 import { userSchema } from "@/zod"
-import bcrypt from "bcryptjs"
 export async function signUp(previousState:unknown,formdata:FormData) {
-    const saltRounds =10
 
     const email = formdata.get("email") as  string
     const name =formdata.get("name") as  string
@@ -22,23 +20,37 @@ export async function signUp(previousState:unknown,formdata:FormData) {
             passwordConfirmation
         })
     if(!validationResult.success){
-        console.log(validationResult.error.errors)
         return {
             success:false,
             errors:validationResult.error.errors
         }
     }
-    const hashedPassword = await bcrypt.hash(password,saltRounds)
+       const supabase = await createClient()
+
         let { error } = await supabase.auth.signUp({
             email,
-            password: hashedPassword
-          })
+            password,
+            
+            options: {
+                data: {
+                  name,
+                },
+                emailRedirectTo:"/sign-in?source=conf"
+                
+                
+            }   
+           })
 
-          if(error){
-            return {
-                success:false,
-                error
-            }
+
+              if(error){
+                return {
+                    error:error.message,
+                    success:false
+                }
+              }
+       
+          return{
+            success:true
           }
     } catch (error) {
         console.log(error)

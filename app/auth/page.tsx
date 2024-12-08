@@ -1,15 +1,24 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SignUp from "../components/auth/SignUp"
 import SignIn from "../components/auth/SignIn"
+import { useSearchParams } from "next/navigation"
 
 
 
 
 
 const AuthPage = () => {
+    const params = useSearchParams()
+    const source = params.get("source")
     const [isNew,setIsNew]=useState(true)
+
+    useEffect(()=>{
+        if(params.get("source")){
+            setIsNew(false)
+        }
+    },[params])
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center">
         <div className="w-full flex flex-col justify-start items-center  shadow-lg  ">
@@ -22,7 +31,7 @@ const AuthPage = () => {
         </button>
         </div>
         {isNew && <SignUp/>}
-        {!isNew && <SignIn/>}
+        {!isNew && <SignIn source={source ?? undefined}/>}
 
     </div>
         </div>
