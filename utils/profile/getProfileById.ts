@@ -9,7 +9,7 @@ export default async function getProfileById(id:string){
 
     try {
         const client = await createClient()
-        const {error,data} = await client.from("profiles").select().eq("id",id).single()
+        const {error,data} = await client.from("profiles").select().eq("user_id",id).single()
 
         if(error){
             return {

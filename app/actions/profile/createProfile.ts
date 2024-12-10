@@ -1,6 +1,8 @@
 "use server"
 
+import { createClient } from "@/config/supabase/supabaseServer"
 import { profileSchema } from "@/zod"
+import { revalidatePath } from "next/cache"
 
 
 
@@ -31,9 +33,29 @@ export async function createProfile(previousState:unknown,formdata:FormData){
                 errors: validationResult.error.issues,
             }
         }
-        
+
+        const socialLinks = JSON.stringify({ facebook, linked_in, instagram })
+
+        const supabase = await createClient()
+        const userData = await supabase.auth.getUser()
+        const res = await supabase.from("profiles").insert({user_id:userData.data.user?.id, business_name, business_description, business_location, primary_phone_number, social_media_links: socialLinks, website_link:website })
+        if(res.error?.message === 'duplicate key value violates unique constraint "profiles_user_id_key"'){
+            return{
+                error:"Profile already exists"
+            }
+        }
+        revalidatePath("/","layout")
+
+        return {
+            success: true,
+            
+
+        }
     } catch (error) {
-        
+        console.log(error)
+        return{
+            error:"Something went wrong"
+        }
     }
 
 

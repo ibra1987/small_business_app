@@ -19,9 +19,9 @@ const [logginOut,setLoggingOut]=useState(false)
   };
 
   return (
-    <div ref={ref} className="fixed w-full md:w-1/3 lg:w-1/4 right-8 md:right-12  lg:right-20 xl:right-36 top-14 text-sm  max-w-full py-10 px-4 bg-gray-50 rounded border flex flex-col justify-center items-start gap-2">
+    <div ref={ref} className="fixed w-full md:w-1/3  lg:w-1/4 z-100 right-8 md:right-12  lg:right-20 xl:right-36 top-14 text-sm  max-w-full py-10 px-4 bg-gray-50 rounded border flex flex-col justify-center items-start gap-2">
     {logginOut && (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-black/15 flex justify-center items-center">
+        <div className="fixed top-0 left-0 w-screen z-250 h-screen bg-black/15 flex justify-center items-center">
             <PuffLoader color="gray"/>
             </div>
     )}
